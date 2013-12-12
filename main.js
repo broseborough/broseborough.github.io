@@ -8,9 +8,10 @@ $(document).ready(function() {
 		"display": "block",
 		"autoplay": false,
 		"loop": false,
-		"path": "",
+		"path": "video/",
 		"filename": "cloudy",
-		"types": ["mp4", "webm", "ogg"]
+		"types": ["mp4", "webm", "ogg"],
+        "poster": "images/cloudy.jpg"
     });
     var videobackgroundblur = new $.backgroundVideo($('.blur'), {
 		"videoid": "blur",
@@ -21,9 +22,10 @@ $(document).ready(function() {
 		"display": "block",
 		"autoplay": false,
 		"loop": false,
-		"path": "",
+		"path": "video/",
 		"filename": "cloudyblur",
-		"types": ["mp4", "webm", "ogg"]
+		"types": ["mp4", "webm", "ogg"],
+        "poster": "images/cloudyblur.jpg"
     });
 
     var sharpBuffered = blurBuffered = false;

@@ -4,14 +4,17 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         files: {
-          'main.min.js': ['main.js']
+          'main.min.js': ['components/jquery.min.js','components/**/*.js', 'main.js']
         }
       }
     },
     less: {
+      options: {
+        compress: true
+      },
       dist: {
         files: {
-          'main.min.less': ['main.less']
+          'main.min.css': ['components/reset.min.less','main.less']
         }
       }
     }

@@ -34,7 +34,6 @@
       var html = '';
       var autoplay = plugin.settings.autoplay ? 'autoplay="autoplay"' : "";
       var loop = plugin.settings.loop ? 'loop="loop"' : '';
-      window.console.log(loop);
       html += '<video id="'+plugin.settings.videoid+'" preload="auto" ' + autoplay + '" ' + loop;
 
       if (plugin.settings.poster) {
