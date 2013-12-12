@@ -1,0 +1,100 @@
+* {
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	font-weight: 100;
+}
+body {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+h1 {
+	font-size: 2em;
+	margin: 40px 20px 10px 20px;
+	z-index: 1;
+}
+h2 {
+	font-size: 1.2em;
+	margin: 0 20px;
+	z-index:1;
+}
+.blur {
+	height: 100%;
+	width: 400px;
+	overflow:hidden;
+	position: relative;
+}
+#uxLogo {
+	display: block;
+	position:absolute;
+	top:50%;
+	left: 50%;
+	margin-top: -96px;
+	margin-left: -152px;
+	background: url('images/sprite.png');
+	background-position: -340px 0;
+	width: 304px;
+	height: 193px;
+	overflow: hidden;
+	z-index:0;
+}
+.socialMedia {
+	position: absolute;
+	bottom: 40px;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+}
+.socialMedia ul {
+	overflow: hidden;
+	margin: 10px 20px 0;
+}
+.socialMedia ul li {
+	display: block;
+	height: 32px;
+	width: 32px;
+	float: left;
+	list-style: none;
+	list-style-position: inside;
+	font-size: 1px;
+	text-indent: 100%;
+	overflow: hidden;
+	margin-right: 10px;
+	position:relative;
+}
+.socialMedia ul li div {
+	position:absolute;
+	background: url('images/sprite.png');
+}
+.socialMedia ul li div.selected {
+	opacity: 0;
+	transition: opacity .5s ease-in-out;
+}
+.socialMedia ul li:hover div {
+	opacity: 0;
+}
+.socialMedia ul li:hover div.selected {
+	opacity: 1;
+}
+
+#facebook.selected{ background-position: 0 0; width: 32px; height: 32px; } 
+#facebook{ background-position: -34px 0; width: 32px; height: 32px; } 
+#github.selected{ background-position: -68px 0; width: 32px; height: 32px; } 
+#github{ background-position: -102px 0; width: 32px; height: 32px; } 
+#instagram.selected{ background-position: -136px 0; width: 32px; height: 32px; } 
+#instagram{ background-position: -170px 0; width: 32px; height: 32px; } 
+#linkedin.selected{ background-position: -204px 0; width: 32px; height: 32px; } 
+#linkedin{ background-position: -238px 0; width: 32px; height: 32px; } 
+#twitter.selected{ background-position: -272px 0; width: 32px; height: 32px; } 
+#twitter{ background-position: -306px 0; width: 32px; height: 32px; } 
+
+
+@media ( max-height : 217px ) {
+	.blur > h1, .blur > h2 {
+		display: none;
+	}
+}
+@media ( max-width : 340px ) {
+	h1 {
+		font-size: 1.5em;
+	}
+}
