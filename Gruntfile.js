@@ -4,7 +4,8 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         files: {
-          'main.min.js': ['components/jquery.min.js','components/**/*.js', 'main.js']
+          'main.min.js': ['components/jquery.min.js','components/**/*.js', 'main.js'],
+          'blog.min.js': ['components/jquery.min.js', 'components/**/*.js', 'blog.js']
         }
       }
     },
@@ -14,14 +15,21 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'main.min.css': ['components/reset.min.less','main.less']
+          'main.min.css': ['components/reset.min.less','fonts/stylesheet.css', 'main.less']
         }
+      }
+    },
+    watch: {
+      dist: {
+        files: ['main.js', 'main.less'],
+        tasks: ['uglify', 'less']
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['uglify', 'less']);
 

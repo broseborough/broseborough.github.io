@@ -6,16 +6,23 @@ body {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	padding: 0;
+	margin: 0;
 }
 h1 {
 	font-size: 2em;
-	margin: 40px 20px 10px 20px;
+	margin: 40px 20px 0px 20px;
 	z-index: 1;
 }
 h2 {
 	font-size: 1.2em;
 	margin: 0 20px;
 	z-index:1;
+}
+h3 {
+	color: #454545;
+	font-size: 2em;
+	font-family: 'baron_neueregular';
 }
 .blur {
 	height: 100%;
@@ -88,6 +95,31 @@ h2 {
 #twitter{ background-position: -306px 0; width: 32px; height: 32px; } 
 
 
+.content-container {
+	position:absolute;
+	top: 0;
+	bottom: 0;
+	left: 400px;
+	right: 0;
+	background: #fff;
+	font-family: 'naumanregular';
+	font-size: 1.2em;
+	font-weight: normal;
+	color: #2e2e2e;
+	overflow-y: scroll;
+}
+.content {
+	padding: 40px;
+}
+.content p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.content .block {
+	margin-bottom: 40px;
+}
+
 @media ( max-height : 217px ) {
 	.blur > h1, .blur > h2 {
 		display: none;
@@ -96,5 +128,29 @@ h2 {
 @media ( max-width : 340px ) {
 	h1 {
 		font-size: 1.5em;
+	}
+}
+
+@media ( max-width : 800px ) {
+	body {
+		height: auto;
+		width: 100%;
+		overflow-y: visible;
+		overflow-x: hidden;
+	}
+	.blur {
+		position: relative;
+		width: 100%;
+	}
+	.content-container {
+		position: relative;
+		top: 0;
+		left: 0;
+		clear: both;
+		width: 100%;
+		height: auto;
+	}
+	.content {
+		padding: 20px;
 	}
 }
