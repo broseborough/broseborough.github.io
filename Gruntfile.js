@@ -4,8 +4,8 @@ module.exports = function(grunt) {
     uglify: {
       dist: {
         files: {
-          'main.min.js': ['components/jquery.min.js','components/**/*.js', 'main.js'],
-          'blog.min.js': ['components/jquery.min.js', 'components/**/*.js', 'blog.js']
+          'main.min.js': ['analytics.js', 'components/jquery.min.js','components/**/*.js', 'main.js'],
+          'blog.min.js': ['analytics.js', 'components/jquery.min.js', 'components/**/*.js', 'blog.js']
         }
       }
     },
