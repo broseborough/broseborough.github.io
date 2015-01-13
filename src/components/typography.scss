@@ -1,0 +1,29 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300|Merriweather:400,300,200|Sarina);
+
+
+body {
+	font-family: 'Merriweather', serif;
+	font-weight: 200;
+	font-size: 18px;
+}
+
+
+h1, h2 {
+	margin: 25px 0;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	color: #191919;
+}
+h1 { font-size: 42px; }
+h2 { font-size: 30px; }
+h3 { font-size: 18px; }
+
+.hidden-text {
+	display: block;
+	height: 1px;
+	width: 1px;
+	position:absolute;
+	text-indent: 100%;
+	font-size: 1px;
+	overflow:hidden;
+}
