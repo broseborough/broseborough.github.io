@@ -1,0 +1,73 @@
+$breakpoints: (
+	xs: (min: none, max: 767px),
+	sm: (min: 768px, max: 991px),
+	md: (min: 992px, max: 1199px),
+	lg: (min: 1200px, max: none)
+);
+
+@mixin breakpoint ($breakpoint, $minMax:false) {
+	@if $minMax == min {
+		@if $breakpoint == xs {
+			@content;
+		}
+		@else {
+			@media (min-width: map-get(map-get($breakpoints, $breakpoint), min)) {
+				@content;
+			}
+		}
+	}
+	@else if $minMax == max {
+		@if $breakpoint == lg {
+			@content;
+		}
+		@if $breakpoint == xs {
+			@media (max-width: map-get(map-get($breakpoints, $breakpoint), max)) {
+				@content;
+			}
+		}
+	}
+	@else {
+		@if $breakpoint == xs {
+			@media (max-width: map-get(map-get($breakpoints, $breakpoint), max)) {
+				@content;
+			}
+		}
+		@else if $breakpoint == lg {
+			@media (min-width: map-get(map-get($breakpoints, $breakpoint), min)) {
+				@content;
+			}
+		}
+		@else {
+			@media (min-width: map-get(map-get($breakpoints, $breakpoint), min)) and (max-width: map-get(map-get($breakpoints, $breakpoint), max)) {
+				@content;
+			}
+		}
+	}
+}
+
+@mixin device ($device) {
+	@if $device == mobile {
+		$max-width: map-get(map-get($breakpoints, xs), max);
+		$scaled-max: $max-width * 1.5;
+		@media (max-device-width: $max-width),
+		(-webkit-min-device-pixel-ratio: 1.5) and (max-device-width: $scaled-max),
+		(min--moz-device-pixel-ratio: 1.5) and (max-device-width: $scaled-max),
+		(-o-min-device-pixel-ratio: 1.5) and (max-device-width: $scaled-max),
+		(min-device-pixel-ratio: 1.5) and (max-device-width: $scaled-max) {
+			@content;
+		}
+	}
+	@else if $device == tablet {
+		$min-width: map-get(map-get($breakpoints, sm), min);
+		$max-width: map-get(map-get($breakpoints, sm), max);
+		$scaled-min: $min-width * 1.5;
+		$scaled-max: $max-width * 1.5;
+		@media (min-device-width: $min-width) and (max-device-width: $max-width),
+		(-webkit-min-device-pixel-ratio: 1.5) and (min-device-width: $scaled-min) and (max-device-width: $scaled-max),
+		(min--moz-device-pixel-ratio: 1.5) and (min-device-width: $scaled-min) and (max-device-width: $scaled-max),
+		(-o-min-device-pixel-ratio: 1.5) and (min-device-width: $scaled-min) and (max-device-width: $scaled-max),
+		(min-device-pixel-ratio: 1.5) and (min-device-width: $scaled-min) and (max-device-width: $scaled-max) {
+			@content;
+		}
+	}
+}

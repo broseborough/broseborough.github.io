@@ -1,0 +1,22 @@
+.photogrid .photo {
+	background-size: cover;
+	background-position: center center;
+}
+.photogrid .photo.square::after {
+	content: '';
+	display: block;
+	padding-top: 100%;
+}
+.photogrid .photo.half-height::after {
+	content: '';
+	display: block;
+	padding-top: 50%;
+}
+.hero.text {
+	padding-top:0;
+	text-align: left;
+}
+#PartsList ul {
+	list-style: disc;
+	list-style-position: inside;
+}

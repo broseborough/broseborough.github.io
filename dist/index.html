@@ -2,58 +2,20 @@
 <html>
 	<head>
 		<title>Braden Roseborough</title>
-		<link rel="stylesheet" href="framework.min.css"/>
-		<style>
-			#CompanyLogos {
-				text-align: center;
-				margin: 0 auto;
-				padding: 0;
-			}
-			#CompanyLogos li {
-				display:inline-block;
-				height: 150px;
-				width: 150px;
-				text-indent: 100%;
-				font-size: 1px;
-				background-position: center center;
-				background-size: contain;
-			}
-			#AppleLogo {
-				background-image: url('images/apple-logo.png');
-			}
-			#AmazonLogo {
-				background-image: url('images/amazon-logo.png');
-			}
-			#LyndaLogo {
-				background-image: url('images/lynda-logo.png');
-			}
-
-			#LatestUpdates li {
-				list-style: none;
-				display:block;
-			}
-			#LatestUpdates li .update {
-				background: white;
-				color: #333;
-				overflow:hidden;
-				margin-bottom: 15px;
-			}
-			.update img {
-				width: 100%;
-			}
-			.update h3 {
-				line-height: 1.3em;
-				margin: 15px;
-			}
-		</style>
+		<link rel="stylesheet" href="/framework.min.css"/>
+		<link rel="stylesheet" href="/page/index.min.css"/>
 	</head>
 	<body>
 		<nav>
 			<div class="constrain">
+				<input id="MenuToggle" type="checkbox"/>
+				<label id="MenuIcon" for="MenuToggle" class="lines-button arrow arrow-left" type="button" role="button" aria-label="Toggle Navigation">
+					<span class="lines"></span>
+				</label>
 				<a id="SiteLogo" href="/">Braden Roseborough</a>
 				<div class="menu">
 					<a href="/Videos">Videos</a>
-					<a href="/Photography">Photography</a>
+					<a href="/Photos">Photos</a>
 					<a href="/Projects">Projects</a>
 				</div>
 			</div>
@@ -64,7 +26,7 @@
 					<h1>I'm a software developer who cares a lot about user experience and things that fly.</h1>
 				</div>
 			</div>
-			<video src="images/RedRover.mp4" autoplay loop></video>
+			<video src="/images/RedRover.mp4" autoplay loop></video>
 		</div>
 		<div class="hero text">
 			<div class="constrain">
@@ -81,26 +43,26 @@
 				<h2>Recent Updates</h2>
 				<p>Check out my latest photos, videos, and projects. If you like what you see, use the links at the top of the page to discover more.</p>
 				<ul id="LatestUpdates" class="col-xs-12">
-					<a href="/Videos#SatsopNuclearTower">
+					<a href="/Videos#SatsopNuclearReactor">
 						<li class="col-xs-12 col-sm-4">
 							<div class="update">
-								<img src="/images/Satsop.png" alt="Satsop Nuclear Towers">
-								<h3>Satsop<br/>Nuclear Towers</h3>
+								<div class="image" style="background-image:url('/images/Satsop.png')" alt="Satsop Nuclear Towers"></div>
+								<h3>Satsop<br/>Nuclear Reactor</h3>
 							</div>
 						</li>
 					</a>
 					<a href="Projects#HelmetAltimeter">
 						<li class="col-xs-12 col-sm-4">
 							<div class="update">
-								<img src="/images/HelmetAltimeter/Plane.jpeg" alt="The helmet embedded altimeter">
+								<div class="image" style="background-image:url('/images/HelmetAltimeter/InHelmet.jpg')" alt="The helmet embedded altimeter"></div>
 								<h3>Helmet embedded altimeter</h3>
 							</div>
 						</li>
 					</a>
-					<a href="/Videos#AbandonmentJackBlockPark">
+					<a href="/Videos#Abandonment-PortOfSeattle">
 						<li class="col-xs-12 col-sm-4">
 							<div class="update">
-								<img src="/images/Abandonment.png" alt="Abandonment - Port of Seattle Jack Block Park">
+								<div class="image" style="background-image: url('/images/Abandonment.png')" alt="Abandonment - Port of Seattle Jack Block Park"></div>
 								<h3>Abandonment<br/>Port of Seattle</h3>
 							</div>
 						</li>
@@ -114,6 +76,7 @@
 				<li><a href="http://facebook.com/broseborough" target="_blank" class="icon-facebook-2"><span class="hidden-text">Facebook</span></a></li>
 				<li><a href="http://linkedin.com/in/broseborough" target="_blank" class="icon-linkedin"><span class="hidden-text">LinkedIn</span></a></li>
 				<li><a href="http://instagram.com/broseborough" target="_blank" class="icon-instagram"><span class="hidden-text">Instagram</span></a></li>
+				<li><a href="https://www.youtube.com/user/berdman/videos" target="_blank" class="icon-youtube"><span class="hidden-text">Youtube</span></a></li>
 			</ul>
 			<p>Connect with me on social media</p>
 		</footer>

@@ -62,6 +62,9 @@ module.exports = function (grunt) {
                 files: {
                     'dist/framework.min.css': 'tmp/framework.cat.scss',
                     'dist/page/index.min.css': 'src/page/index.scss',
+                    'dist/page/photography.min.css': 'src/page/photography.scss',
+                    'dist/page/projects.min.css': 'src/page/projects.scss',
+                    'dist/page/videos.min.css': 'src/page/videos.scss',
                 }
             }
         },
@@ -73,7 +76,7 @@ module.exports = function (grunt) {
                         'src/bower_components/modernizr/modernizr.js',
                         'src/bower_components/jquery/dist/jquery.min.js', 
                         'src/bower_components/bootstrap/dist/js/bootstrap.min.js',
-                        //'src/ThirdParty/**/*.js',
+                        'src/ThirdParty/**/*.js',
                         'src/components/**/*.js'
                     ]
                 }

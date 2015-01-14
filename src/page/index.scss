@@ -1,0 +1,57 @@
+@import '../components/breakpoint.variables.scss';
+
+#CompanyLogos {
+	text-align: center;
+	margin: 0 auto;
+	padding: 0;
+}
+#CompanyLogos li {
+	display:inline-block;
+	height: 150px;
+	width: 150px;
+	text-indent: 100%;
+	font-size: 1px;
+	background-position: center center;
+	background-size: contain;
+}
+@include breakpoint (xs) {
+	#CompanyLogos li {
+		height: 100px;
+		width: 100px;
+	}
+}
+#AppleLogo {
+	background-image: url('/images/apple-logo.png');
+}
+#AmazonLogo {
+	background-image: url('/images/amazon-logo.png');
+}
+#LyndaLogo {
+	background-image: url('/images/lynda-logo.png');
+}
+
+#LatestUpdates li {
+	list-style: none;
+	display:block;
+}
+#LatestUpdates li .update {
+	background: white;
+	color: #333;
+	overflow:hidden;
+	margin-bottom: 15px;
+}
+.update div.image {
+	width: 100%;
+	background-size: cover;
+	background-position: center center;
+
+	&::after {
+		content: '';
+		display: block;
+		padding-top: 56.25%;
+	}
+}
+.update h3 {
+	line-height: 1.3em;
+	margin: 15px;
+}	
