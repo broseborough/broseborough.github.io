@@ -7,7 +7,9 @@ nav {
 	margin: 0;
 	z-index: 5;
 	
-	#SiteLogo {
+	#SiteLogo,
+	#SiteLogo:hover {
+		color: #000;
 		font-family: 'Sarina', sans-serif;
 	}
 	.menu {

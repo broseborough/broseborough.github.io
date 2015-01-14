@@ -1,6 +1,10 @@
 node_modules
+tmp
 src/bower_components
 .sass-cache
 
+dist/fonts
+dist/images
 dist/framework.min.css
 dist/framework.min.js
+dist/framework.min.css.map
