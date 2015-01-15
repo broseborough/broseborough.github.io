@@ -30,6 +30,34 @@
 	background-image: url('/images/lynda-logo.png');
 }
 
+#Friends a,
+#Friends a:visited {
+	color: #ccc;
+	text-decoration: none;
+	-webkit-transition: color 1s ease-out;
+	transition: color 1s ease-out;
+}
+#Friends a:hover {
+	color: #000;
+	text-decoration: none;
+}
+#Friends li {
+	display: inline-block;
+	margin: 0 30px 30px;
+	i {
+		display: block;
+		margin: 0 auto 10px;
+		height: 75px;
+		width: 75px;
+		border-radius: 50%;
+		background-position: center center;
+		background-size: cover;
+	}
+	@include breakpoint(xs) {
+		margin: 0 10px 30px;
+	}
+}
+
 #LatestUpdates li {
 	list-style: none;
 	display:block;
