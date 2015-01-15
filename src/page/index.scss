@@ -1,5 +1,9 @@
 @import '../components/breakpoint.variables.scss';
 
+.no-autoplay .hero.video {
+	background-image: url('/broseborough.com-videos/Homepage-1080p-00003.png');
+}
+
 #CompanyLogos {
 	text-align: center;
 	margin: 0 auto;
@@ -54,7 +58,7 @@
 		background-size: cover;
 	}
 	@include breakpoint(xs) {
-		margin: 0 10px 30px;
+		margin:0 5px 10px;
 	}
 }
 

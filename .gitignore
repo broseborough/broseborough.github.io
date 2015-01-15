@@ -5,6 +5,7 @@ src/bower_components
 
 dist/fonts
 dist/images
+dist/page
 dist/framework.min.css
 dist/framework.min.js
 dist/framework.min.css.map

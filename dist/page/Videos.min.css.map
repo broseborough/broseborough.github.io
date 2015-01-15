@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,mBAAoB,CACnB,WAAW,CAAE,CAAC,CAEf,MAAO,CACN,KAAK,CAAE,IAAI,CACX,eAAe,CAAE,KAAK,CACtB,mBAAmB,CAAE,aAAa,CAClC,aAAa,CAAE,IAAI,CAEpB,KAAM,CAAE,OAAO,CAAE,IAAI,CACrB,aAAc,CACb,OAAO,CAAE,EAAE,CACX,OAAO,CAAE,KAAK,CACd,WAAW,CAAE,MAAM,CACnB,KAAK,CAAC,IAAI",
-"sources": ["../../src/page/videos.scss"],
-"names": [],
-"file": "videos.min.css"
-}
