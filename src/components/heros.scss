@@ -46,6 +46,9 @@
 		z-index:0;
 	}
 }
+.autoplay .hero.video video {
+	display: block;
+}
 .no-autoplay .hero.video video {
 	display:none;
 }
