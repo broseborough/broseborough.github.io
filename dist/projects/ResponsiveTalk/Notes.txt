@@ -1,0 +1,184 @@
+# CSS for the Responsive Web #
+
+## Mission ##
+
+	The ART UX team has spent a lot of time making sure that our designs fit into a responsive framework. We know that our users have varying screen resolutions, that many of our users use our product at half the size or a third of the size of their already small display. 
+	For the hour that I have with you today, I want you to walk away with a high level understanding of why responsive design is important to us, what makes our designs responsive, and how those responsive designs get implemented outside of our mockups.
+
+## Core values ##
+
+	### User Experience ###
+
+		The user's experience is our most important core value. We care a lot about how our users interact with our product. Hire is a tool that people will be basically living in 40 hours per week. We want to provide them with an experience that allows them to get their work done efficiently and we want to minimize the frustrations that they experience while they are using Hire.
+
+		We know that most of our users are using screens with a resolution of 1600x900 or less, that seems to give us a decent amount of space to work with, these are laptop computers after all. However, during our user testing we realized that many of our users would reduce the browser window size to use only half of the screen or less so that they could cross reference other tools. That gives us around 800px or less of horizontal screen real-estate to design with.
+
+		We also know that with the kindle@work program, we will see an influx of tablet users, and users who are wanting to reference this information on the go.
+
+		With so much variation in the amount of screen real-estate we knew that going responsive was an important design challenge for us to overcome.
+
+## Key Concepts ##
+
+	### Breakpoints ###
+
+		There is a fine balance between dealing with variation, and keeping a design maintainable. The problem is that as you increase the number of variations that are possible within a design, you also increase the complexity of making the design look good. You can add design changes to keep the design looking the way you want at each variation but as you add design changes the complexity of actually implementing the design increases as well. 
+
+		As a design constraint, and to make it easy to implement our designs across the entire platform, we have agreed on four window sizes where we will allow our designs to "break". Once the design breaks it will shift slightly into a design better suited for the current window size. These four points are called breakpoints. You will hear us reference these breakpoints by names that correspond to their relative sizes. 
+		
+			1. XS
+			1. SM
+			1. MD
+			1. LG
+		
+		Instead of an infinite number of window sizes that we could choose from to change the design, we instead focus on making sure that the design works within the entire range from the breakpoint's minimum width, to the breakpoint's maximum width, and we only allow the design to shift once it enters another breakpoint.
+
+		It's important to note that this is a design constraint. There are definitely compromises that will be made because of the constraint, but, it's important for the maintainability and implementation of the designs.
+
+		There is also a correlation to the type of device that you might see using a particular breakpoint because of the resolution of the device and the range of the breakpoint. For instance mobile phones will likely only ever see the xs breakpoint, tablets will likely only ever see the sm breakpoint, but laptop and desktop computers can fall within any of the four ranges, because of the variation in display resolution, but also because of the variation in how users manage their browser windows on those platforms.
+
+
+	### The Grid ###
+
+		Let's set breakpoints in the parking lot for a moment here while we talk about another key concept in responsive design. 
+		Let's talk about "The Grid"
+
+		The grid is another design constraint that we are placing on ourselves in order to make the designs easier to communicate, implement, and maintain. The grid is one of the biggest points of contention between designers and their designs because it's often incredibly difficult to fit things into these pre-determined sets of containers. We constantly have to be reminded of the rules and we frequently make mistakes in this department. However, our team has gone through many working sessions to understand how our designs play nicely with the grid, I think we have a pretty good handle on it from a design perspective.
+	
+		Just like breakpoints, the grid's purpose is to reduce the amount of variation that we need to design for between page layouts.
+
+		Let's take a look at how a basic grid works.
+
+		On the most basic level a grid serves two purposes:
+
+			1. It allows us to communicate the width of an element.
+			1. It allows us to set the position of an element in the layout.
+
+		#### An Intruduction to Columns ####
+
+			The way that it accomplishes these tasks is to diving an element into equal width columns.
+			There are a number of different grid systems out there that all work slightly differently. Our grid system uses 12 columns. 
+
+		#### Communicating the width of an element ####
+
+			We can size an element by saying how many columns it should consume.
+
+			Sizing elements on the grid seems to be a difficult concept to talk about because of it's abstract nature ( how wide is a column? ). Because the width of a column is unspecified, this is often a point of contention when onboarding designers who want their designs to be "pixel perfect". Because of this, we almost always discuss things based on pixels, because we know how large a pixel is, right?
+
+			Let's try an experiment, who can tell me how large a 500px by 500px square is in inches, or in centimeters, or in millimeters, or in any unit of measure other than pixels? Is that measurement true all of our devices? What about when pixel doubling is involved?
+			The point that I'm trying to illustrate is that we don't actually know how large a pixel is, we've learned to work with this abstract constraint, and we can learn to work with another one.
+
+			The reason that talking in pixels is not incredibly helpful, is that without specifying which device we would view the design on, and without doing some reasearch into the resolution of that devices and wether or not the device/browser combination performs pixel doubling, we don't have an intelligent way to communicate the relative size of the elements on the page in relation to the device or to the other elements.
+
+			Designing through the lens of the grid system, allows us to communicate about the relative size of objects on the screen. Because the number of columns that we have to work with is consistent across every device, we can determine if the element is going to take up the whole width, half of the width, or one third of the width of the window, despite the display size and resolution.
+
+		#### Setting the position of an element in a layout ####
+
+			Because grid columns are aligned next to each other, it allows us to easily communicate, and implement, more complex layouts.
+			An element that only consumes three columns will leave 9 more columns in the grid to work with. We may choose to fill that space with a larger element that is 9 columns wide, or a set of smaller elements whose width totals up to 9 columns. We can do all of this without applying any additional styling to these elements to set their position or size.
+
+	### The marriage of breakpoints and the grid ###
+
+		Some grid systems ( bootstrap included ) allow you to marry the use of breakpoints and the grid. It accomplishes this by essentially setting up 4 separate grids that elements can be aligned to. Those grids are then turned on and off depending on the breakpoint that the window falls in. This allows variation in the design between different window sizes. For instance, in many cases we know that an element taking up two or three columns in a large window will be large enough to accomplish their task, but those same two or three columns will be too small in an extra small window. In this case we can actually specify that at the smaller breakpoints these elements should take up a larger portion of the screen.
+
+## Writing Code Responsive-ibly ##
+	
+	### Using the grid ###
+		Utilizing the grid is incredibly easy. It all hinges on the use of class names applied to the elements that you want to have consume the columns. For example let's assume that I have this teal box, and I want it to take up seven columns. I can apply the class directly to that teal box. Nothing else is required to give that element it's width. It will be placed starting at the first column, and it will span the next seven columns, leaving five columns of space on it's right side. 
+
+		The class name looks something like this:
+			`col-xs-12`
+		Where the name always starts with `col-`, and ends with the number of columns that you want to consume `-12`. This bit in the middle `-xs-` refers to the breakpoint that this class applies to. So what this means is that this element will consume twelve columns at the extra small breakpoint. Alternatively you might see something like this `col-md-5`, this element will span five columns at the medium breakpoint.
+
+		#### Combining classes ####
+
+			You can combine these classes in order to create variation in the design where necessary. For example:
+				`col-xs-12 col-md-5`
+			If these two classes are applied to the same element, the element will be twelve columns wide at the extra small breakpoint and if the browser is wide enough to be in the range of the medium breakpoint the element will span 5 columns.
+
+			These classes are designed to cascade up so that the smallest breakpoint that is declared is used, unless a larger breakpoint is specified.
+			In this example `col-xs-8` the element will take up 8 columns starting at the extra small breakpoint, it will also take up 8 columns at the small, medium, and large breakpoints. 
+
+			`col-xs-4 col-sm-6` this element will take 4 columns at the extra small breakpoint, then 6 columns at the small, medium and large breakpoints. 
+
+			One more example, `col-xs-3 col-md-12`, this element will take 3 columns at the extra small, and small breakpoints, but will consume 12 columns at the medium and large breakpoints. 
+
+			The rule of thumb here is to always start by declaring the xs class first, before declaring the other classes. The reasoning behind this is that the classes cascade up, but they do not cascade down sizes. So if you had an element that with a class like this `col-sm-8`. The element would look fine in small medium and large breakpoints, but would be completely broken in the extra small breakpoint. The easiest remedy to this is to make sure that the extra small class is declared on on any element that utilizes the grid.
+
+	### Understanding Column Padding ###
+
+		In order to keep even spacing between elements, each column contains 15px of padding. This means that any element that is styled using the grid will always contain 30px of padding horizontally (15px on each side). Grid elements are sized using border-box box-sizing. If you are familiar with the box model in css what this means is that the padding is subtractive from the width of the box not additive. This keeps the column sizes consistent and helps prevent wrapping and other issues that might cause the layout to be broken.
+
+		It's incredibly important that you understand the box-model when working with the grid so that you understand why content falls where it does. What you will notice because of this padding is that child elements, and content such as text will typically not fall right on a gridline, but they will instead be inset 15px. Designers and developers both need to take this into account. 
+
+		There are three simple classes that you can implement that will help you deal with issues relating to this padding.
+
+			1. `.snap`
+			1. `.snap-left`
+			1. `.snap-right`
+
+		What each of these do is remove the padding on both sides, or left, or the right side.
+		These classes do not come with the bootstrap framework, but it takes only a few lines to implement them in a re-usable way.
+
+	### Nesting Grids ###
+
+		Remember that I said we can apply these classes to any element on the page. What that means is that we can actually have nested grids.
+		Let's say that I have an element that spans 6 columns, I can then split that element into 12 columns and size things based on those columns within the first element. By doing this we are changing the lens again. Instead of saying how much of the page an element consumes, we are talking about how much of the parent element's width we are consuming. This can get confusing very quickly. But let's dive a little bit into this technique with a few examples.
+
+		Here are two elements that are positioned side by side. The first consumes 8 columns, the second takes 4.
+		If we want to create some children for the first element we can split it into 12 columns, and create a layout that allows these elements to utilize the grid.
+
+		We can do the same for the smaller 4 column element. We still split it into 12 smaller columns and we can use this nested grid for the layout.
+
+		You probably won't see grids nested very many levels deep, but it can be useful for making sure that the children of grid elements are responsively laid out as well. 
+
+	### Our Snapping Container System ###
+
+		Many grid systems come with one of two container systems, either a fixed width container like the 960 grid system, or a fluid grid like the golden grid system. Bootstrap comes with an option for both. For our designs we opted to use neither, with good reason. Let's talk through the system that we have created. 
+
+		Our container system is what we are calling a snapping container. It is a fixed width container, that changes sizes only once per breakpoint.
+		It leaves a minimum of 15px of padding between the container's edge and the browser window's edge, on either side, and ensures that the content is centered at any size larger than the breakpoint's minimum size.
+
+		The size stays fixed within the entire range of the breakpoint, until a larger or smaller breakpoint is reached. This is true of the small, medium and large breakpoints, but the site becomes completely fluid at the extra small breakpoint. It needs to do this so that the application can be used even on the smallest mobile devices without the need to scroll horizontally.
+
+		Again the fixed size allows us to reduce the number of variations that we need to design for, while the shift in size allows us to manage working with small window sizes or devices.
+
+		This functionality comes for free by wrapping the entire contents of a page in an element with the class name `.snap-container`. Again this is a class that we have implemented in our prototype code, so for other teams, you may need to import this class into your global stylesheets.
+
+		Before we move on from the snapping container I want to mention one common use case where you may want to have multiple snapping containers on a page. There are circumstances where you will want a background color or band to span the entire width of the page. It's perfectly acceptable to have a design that does this, and it's not difficult to implement. The big rule to remember is that while backgrounds can span the entire width of the page, content must be contained within the bounds of the snapping contianer. Otherwise it may break the layout, or get cut off by the edge of the page.
+
+		In order to implement a background that spans the entire page just place the snapping container inside of your background element. For instance take a look at this navigation:
+
+			<navigation>
+				<ul class="snap-container">
+					<li>Link 1</li>
+					<li>Link 2</li>
+				</ul>
+			</navigation>
+
+		In this example the navigation element may be styled to take up 100% of the width and have whatever background you wish, but the link elements are contstrained to the bounds of their parent, the unordered list which is a snap-container.
+	
+	### More robust breakpoints ###
+
+		This is the last bit that we will talk about before ending the talk and answering any questions that you might have. 
+		I want to talk with you about using more robust breakpoints. Until this point we have only talked about adjusting an elements size and layout using the grid and breakpoints. However, you will eventually come across a senario where you want to adjust some other style attribute of an element based on the size of the window. 
+
+		The common way of doing this is by using media queries. If you do some reasearch and digging you'll discover that media queries are incredibly robust in their capabilities of detecting different media types and sizes. 
+
+		Under the hood this is how all of the breakpoints are managed in our system. However, for our team we have a slightly easier way of working with our breakpoints. Instead of writing complex media queries, we have created SASS mixins that will allow you to insert css content at a given breakpoint. The benefit of using the mixins over the media queries is that you don't actually have to know the exact range of the breakpoint (from it's minimum pixel width to maximum). If we decide to modify these breakpoints in the future we only need to do that in a single place. And, on top of all of that, the mixins are more concise so they are easier and quicker to utilize than writing new media queries all the time. 
+
+		If you are unfamiliar with how mixins work, this mixin is an easy way to learn anyhow. Here's an example in SASS:
+
+			#MyElement {
+				background: black;
+
+				@include breakpoint(md) {
+					background: red;
+				}
+			}
+
+		In this example you will see that we are selecting an element with an id of "MyElement". This element typically has a black background. However, any time our window size falls within the medium breakpoint, the background of #MyElement turns red.
+
+		So you can see here that the breakpoints can be used to manage styles other that width and layout, while we try to keep these kinds of overrides to a minimum, there may be circumstances where utilizing these mixins is necessary.
+
+
+## Questions and Goodbye ##

@@ -1,0 +1,316 @@
+# Conference Notes #
+
+
+## TOC ##
+	1. Introduction
+		1. Mission
+		1. Core Values
+	1. Overview
+		1. What are stylesheets for?
+			1. Style
+			1. Animation
+		1. What are they not for?
+			1. Data
+			1. Interaction
+		1. Why is it better than javascript styles?
+			1. Performance
+			1. Syntax
+			1. Discoverability
+	1. Strengths and Weaknesses
+		1. CSS3
+		1. LESS and SASS
+		1. Share Feature Comparison Chart
+	1. Deep dive into:
+		1. CSS3 Features
+			1. Level 3 Selectors
+				1. Simple selectors vs. Sequences
+				1. Attribute Selectors
+				1. General Sibling Combinators
+				1. Psuedo Elements
+			1. Color
+			1. Transitions
+			1. Animations
+			1. Media Queries
+		1. SASS & LESS Features
+			1. Variables
+			1. Mixins
+			1. Nested Rules
+			1. Compiling
+			1. Tools
+
+
+## Mission ##
+
+	When I first started working at lynda.com, I was asked if I felt that front end developers were viewed as second rate programmers. I think that it's a really interesting question to ask. Because, while I think that the implication of the question is true, "that we are VIEWED as second rate", I think that we are at fault for not being our own advocates for supremacy.
+
+	My job title at lynda.com, the one that it says on my business card, is UI Engineer. It doesn't say code monkey, and it doesn't say developer. I hope my directors would agree with me that it says engineer for a very specific reason.
+
+	I want this to be our definition of an engineer for the purpose of this talk:
+		"An engineer is a professional practicioner of engineering, concerned with applying scientific knowledge, mathematics, and ingenuity to develop solutions for technical problems." (wikipedia:Engineer)
+
+	** Highlight scientific knowledge mathematics and inginuity. **
+
+	Before I lose you. This talk IS about CSS3, LESS, and SASS, but the mission is not to have you walk away with a vague, or frankly even deep, understanding of the technologies. You will gain experience with them on your own by working with them. The purpose is to help you construct an intelligent argument for or against using the technologies, and to give you confidence to deliver that argument when you need to. 
+
+	I understand that not everyone here calls themselves a UI Engineer. For the sake of our discussion though, if you are working with HTML, CSS, or JavaScript, you are doing Front End / UI work.  
+
+	If you are here as a designer, push yourself to understand the benefits of the technologies so that you can defend your designs, and have intelligent responses to the questions that your engineers are about to start asking you.
+
+## Core Values ##
+
+	Before we jump into CSS3, LESS, and SASS, I want to share with you four things that I have embodied as core values, and why. I hope that this will give you a good picture of who I am as an engineer, but also that you might make these aspirational values of your own.
+
+	1. Role based conventions
+	1. Modularized code
+	1. Performance
+	1. Maintainable code
+
+	### Role Based Conventions ###
+		#### Description ####
+		Creating role based conventions is both a design and an engineering effort. It starts with having an intelligent application architecture, where components perform a specific function, and the layout of those components is defined by the role that they play.
+		#### Example ####
+		Smashing magazine has a great article about how to choose semantic class names for elements (http://css-tricks.com/semantic-class-names/).  
+		One of my favorite examples of this though is twitter bootstrap's buttons. If you have taken a look at twitter bootstap before you will notice that they have seven different styles of button that come with the framework. White, Blue, Green, Light Blue, Yellow, Red, and one that looks like a link.  
+		Most designers and engineers will name the buttons based on these styles ( and in fact embarrissingly this is what we do at lynda ), btn-blue, btn-green, btn-red etc. But with a little more forethought and a commitment to how these styles will be used you can get the role based names like twitter bootstrap. They use Default, Primary, Success, Info, Warning, Danger, and Link.
+		#### Value ####
+		The value of a role based naming convention is that when things change, such as the primary button color, you don't have to refactor your code in order to accomodate. For instance you won't have a class name 'btn-blue' where the color has actually changed to magenta.  
+		We'll talk about how you can use LESS and SASS to help manage these roles even furthur, in a little bit.
+		#### Measureability ####
+		Where do you get the metrics to support the fact that role based naming conventions are better than style based conventions? If you begin to measure the amount of time that you spend refactoring inconsistencies like this, you will quickly get a good idea of the value. If you aren't taking the time to refactor those inconsistencies, then you run the risk of adding confusion when the logical outcome of adding a class to your code does not match the actual result. You also risk bloating your code with duplicate styles because of that confusion.
+	### Modularized Code ###
+		#### Description ####
+		Modularized code is code that acts as a unit is self contained, is re-usable, may be depended upon, and may depend upon others without breaking. You should be able to remove the module and all instances of it, without breaking any other modules. In my opinion when it comes to CSS a module should have no dependence on it's layout.
+		#### Example ####
+		If you take a look at the home page for charles schwab you will see a bunch of little modular boxes. This is a really simple example of modular design, that if one of those boxes was removed the page would reflow and wouldn't be much worse for the wear. I'm not saying the boxes don't have value, they certainly do, and I'm sure that employees of schwab diliberate for hours about what should show up on their front page, but what I'm saying is that removing one of these modules doesn't break the others. In reality it's much easier to demonstrate by removing elements than it is by removing css declarations, but schwab has done a really great job here of seperating their modules, and if you remove their core color classes, or their classes that control the layout presentation, you still get a great looking page that is completely functional. ( https://www.schwab.com/public/schwab/client_home )
+		#### Value ####
+		The value of modularized code has a few benefits. The most noticible of these is probably maintainability. You can change things without fear of other unrelated things breaking. You also gain the ability to test things in well defined pieces.
+		#### Measureability ####
+		You can measure modularity by answering the following questions:
+			1. Is it self contained?
+			1. Is it re-usable?
+			1. Can it have dependents (subclassable)
+			1. Does it depend upon other's (is a subclass)
+	### Performance ###
+		#### Description ####
+		Performance can be described as how quickly a given action is carried out to completion after a user's request, in relation to the quality at which the request is carried out.
+		#### Example ####
+		When I was in middle school one of my responsibilities was moving the lawn in front of my house. My parents were the users of the lawn, and their request was that it would be cut down to a reasonable height. Days after their request they wanted to have a talk with me about my performance. They were unsure of whether or not their reqest was still in process or if there was going to be a timeout involved. Needless to say the next time they made their request I was eager to perform the task as quickly as possible, and I did, however the lawn ended up looking something like this ( picture of a poorly mowed lawn ). Although their request was handled quickly, they still were unhappy with my performance.  
+		When dealing with display code, you DO need to take into consideration both the speed and the quality of the output, especially when you start getting into things like animations. Using CSS for things like animations and modifying styles will significantly increase the performance of your application.
+		#### Value ####
+		The value should be obvious, A higher quality response that is delivered at a higher velocity.
+	### Maintainable code ###
+		#### Description ####
+		This is really more like the result of the first two items plus a slew of other considerations, but I think that asking yourself "Is this maintainable? And is this sustainable?" will significantly improve your future work life
+		#### Value ####
+		Reduces the time necessary for Fixing bugs, making modifications, and adding features.
+## Overview of Stylesheets ##
+	### Stylesheets What are they for? ###
+		Let's jump into stylesheets, and answer the question "What are they for?". 
+			1. Style - the way your application looks
+			1. Animation - a 'module' of style that gives additional feedback to the user.
+	### What are they not for? ###
+		1. Storing Data
+		1. Transforming Data
+		1. Modeling Data
+		1. Interacting with Data
+		While the style has the ability to augment all of these things, css rules are merely the adjectives of the data and interactions of your application. We can get into arguments about whether or not it's possible to use css against it's intended use but there's no need. We have more appropriate languages to help us manage those other things. 
+## Strengths and weaknesses ##
+	### CSS ###
+		CSS has a fairly moderate learning curve in comparison to other languages. It has essentially no "LOGIC" and is more of a markup language for style. Essentially you only have six things that you need to be aware of in CSS to be successfull. First you have selectors, and declarations. Within the declarations you have properties and values. More recently with CSS3 you have media queries, and of course comments. I'm not going to go over each of these things because this isn't an introduction to CSS, but my point is that you can be fairly successful working with css if you just understand the purpose of each of these things.  
+		CSS is directly interpreted by web browsers, so there is no need to compile or translate it. This is huge benefit over precompiled languages because it's one less step in your workflow and can save you a few seconds of compile time, depending on the size or number of stylesheets that you are compiling for your project.
+	### LESS and SASS ###
+		There are some benefits from taking that extra compilation step, and taking your time with the steeper learning curve. The major benefits are the ability to use variables, mixins, and nested rules. Using these features you can end up writing more modular, re-usable, maintainable code if you learn how to use the languages successfully. Utilizing features of the compilers and tools ( which is an inherit part of using LESS and SASS ) may also help your application be more performant.
+	### Why are stylesheets better than modifying the styles via javascript ###
+		Using stylesheets to manage all of the styles, including modified state styles, is beneficial for multiple reasons. First of all they are much more clearly defined. By completely separating the logic and the style syntax, it allows you to focus purely on the style when modifying it. It is more modular. Removing or modifying the style does not change the logic that controls the interaction. It's more performant, because the browser processes the styles before the page is rendered. And frankly it's much easier to read. 
+	### Feature Comparison Chart ###
+## Deep Dive ##
+	### CSS3 ###
+		CSS2 was delivered as a single monolithic recommendation. And browsers would implement it wholly in one piece (kindof). CSS3 is being delivered in modules instead, so that the different pieces can be recommended as they become stable and eventually complete.
+		We are going to talk about four of these modules today that you can start using right away. Keep in mind that older browsers will never utilize these features of css so use them with degradation in mind.
+		#### Level 3 Selectors ####
+			##### Simple Selectors and Sequences #####
+			One of the changes in the selectors module in CSS3 is the difference in definition between simple selectors and what are now called sequences. In older recommendations a simple selector was any selector that would match a given element, but not selector groups. For instance:
+				`body #MainContent h1` was a simple selector
+				where
+				`body #MainContent h1,
+				 body #SecondaryContent h1` is a selector group. 
+			In the new recommendation, simple selectors are defined as the parts of a sequence, and selector groups may contain simple selectors or sequences. For instance: 
+				`body` is a simple selector
+				`#MainContent` is a simple selector
+				while
+				`body #MainContent` is a sequence
+				and 
+				`h1,
+				 body #MainContent` is a selector group that contains both a simple selector and a sequence.
+			This doesn't really change THE WAY that you use selectors, but it does help to define what we are talking about when we talk about combinators, and the specificity of selectors. 
+			##### Substring matching attribute selectors #####
+			If you are familiar with attribute selectors, you will know how incredibly useful they are. In addition to selecting elements by their type, ID, or class names, you also have the ability to select elements by the existence, or value of an attribute. In specifications below CSS3 you were able to select elements using the following rules:
+				1. The existence of an attribute regardless of it's value. (truthy or falsy) [att]
+				1. The exact value of an element. [att=val]
+				1. An attribute whose value is a whitespace separated list of words one of which exactly matches a specified value. [att~=val]
+				1. An attribute whose value either exactly matches a value, or begins with a value and is succeeded by a '-'. According to w3c this was created primarily for language subcode matches such as 'en-us', but you can see how this would be useful for matching locally-namespaced class names or attribute values as well. Great, those were all in CSS2, what about CSS3?  
+				CSS3 adds additional selectors that allow you to match substrings within the attribute value. If you wanted to match an attribute who's value BEGINS with a string you can use [attr^=val]. Want to match an attribute whose value ENDS with a string? Use [attr$=val]. How about if you are just looking for it to CONTAIN a string? [attr*=val]. Remember that you are working with strings, regular expressions and other fancy tricks aren't going to do the job here. Also take not of the difference between the 'begins with' and 'contains' selectors in comparison to the 'language' and 'contains exact match' selectors above.
+				** Example **
+			##### General Sibling Combinators #####
+				Previous recommendations of CSS also had combinators.  
+				The decendant combinator is a whitespace character. For example: 
+					`body h1` is an h1 that is any decendent of the body element. This includes but is not limited to the body's children. It also includes children of children. Again, ANY decendent of the body that is an element of type h1.
+				The child combinator is a greater than character (>). For example:
+					'body > h1' is an h1 that is a direct child of the body element. It does not include children of children.
+				In CSS2 we were given the adjacent sibling combinator which is used with the '+' character. For example:
+					'h1 + p' will select a paragraph element that immediately succeeds (follows) an h1 element. It will not select an element that is not immediately preceded by an h1 element.
+				However, in CSS3 we recieve a new recommendation. That we can use the general sibling combinator (~) to select elements that are either preceeded, or succeeded by an element that matches another selector. For example:
+					'h1 ~ p' will select all paragraph elements who have a sibling 'h1' with the same parent.
+				The use of general sibling combinators actually allows you to decouple the structure of the document from the style if all you need to select is a general sibling.
+			##### Psuedo classes #####
+				Pseudo classes have been around for a long time, but we have only really had a handful of them to play with. They are also sometimes call dynamic classes because the information that you provide can not be deduced directly by the DOM. You should all be familiar with the following classes: 
+					1. Links
+						1. :link
+						1. :visited
+					1. User action
+						1. :hover
+						1. :active
+						1. :focus
+					1. :target
+					1. :lang (language)
+					1. Structural
+						1. :first-child
+				CSS3 adds a handfull of new pseudo classes which allow us to select elements based on their UI States and structure. 
+					1. UI State
+						1. :enabled
+						1. :disabled
+						1. :checked
+						1. :indeterminate
+					1. Structure
+						1. :root
+						1. :nth-child(an+b) (odd|even)
+						1. :nth-last-child(an+b) (odd|even)
+						1. :nth-of-type(an+b) (odd|even)
+						1. :nth-last-of-type(an+b) (odd|even)
+						1. :last-child
+						1. :first-of-type
+						1. :last-of-type
+						1. :only-child
+						1. :only-of-type
+						1. :empty
+						1. :not(selector)
+			##### Pseudo Elements not Pseudo classes #####
+				Pseudo elements are actually excluded from the W3 recommendation for level 3 selectors, however most modern browsers have implemented them so I thought that I should include them here.  
+				Pseudo elements are NOT pseudo classes. Pseudo elements allow you to select or generate content that is not otherwise accessible via the DOM. The difference lies in the fact that with pseudo classes you are selecting an element that the dom makes available based on criteria that is unavailable, where using pseudo elements allows you to select ELEMENTS that are unavailable. They are differentiated by the double colon syntax instead of the single colon syntax, although the recommendation specifies that the single colon syntax will work for pseudo elements so as to not break compatibility with existing style sheets.  
+				The following pseudo classes are being proposed as the recommendation:
+					1. ::first-line
+					1. ::first-letter
+					1. ::before
+					1. ::after
+		#### Color Module ####
+			Previous versions of the recommendation gave us three different ways to specify color values for properties such as color, background-color, and border-color. The most recent recommendation gives us three additional ways to specify color values, rgba, hsl, and hsla. I am by no means an expert on color, mixing colors, or creating color pallets. However, I did some digging into the difference between hsl and rgb, and I think hsl is much easier to work with. You can achieve the same results with both rgba and hsl. It does not give you a wider array of colors to work with, nor does it limit the number of colors that are possible. It merely transforms the way that we look at and work with the color. With RGB you have to mix the three hues at varying levels in order to get the color that you want. This takes a strong understanding of the properties of these colors and how they mix, even if all you are trying to do is make the color brighter or more saturated. With HSL you work with a single hue and adjust the saturation and lightness separately. When we start to look into the color operations that are available in LESS and SASS you will see that you can actually mimick some of the operations in pure css now that hsl is available.  
+			The 'a' portion of these properties refers to the opacity of the color. There is a benefit to using rgba on the color, background, and border properties of elements instead of using the opacity property (which is also part of the color module) because it will allow the transparency to effect the exact property you are specifying, and not the elements children.
+		#### Transitions ####
+			Transitions are probably my favorite css3 proposal. They are part of the working draft, and not yet part of the recommendation, but most modern browsers support transitions with vendor prefixes. The really exciting thing about transitions is the ability to provide additional feedback by animating users interactions, with a truly graceful fallback. If a person's browser doesn't support transitions, then they don't see them. It's a beautiful thing and it's how graceful degredation works. I know that everyone is a big fan of certain JavaScript libraries and the work that they have done toward animating elements via JavaScript. However, there are a few fundamental flaws with the way that they have accomplished this.  
+			First I'd like to bring up the topic that we mentioned earlier in the talk. That CSS has a syntax that lends it'self very well to defining styles. JavaScript being more of a logical programming language is really not "MADE FOR" defining styles. Reading through the markup of a stylesheet is unarguably easier.  
+			Beyond this, most of the JavaScript libraries that support animations attempt to make the animations completely cross-browser compatible. "This sounds like a good thing" you say, but in practice what happens is that older browsers start to get caught up in the details of the animation and fall short on the user's expectations. The transitions get choppy and slow, the browser may freeze up, because it was never inteded to do such amazing things. Dropping the animation for browsers that we know won't function well provides a much better experience, because the user won't have to wait for the browser to catch up.  
+			In addition to the degradation, you also get hardware acceleration by using certain properties in your transitions. These properties are specifically the 3d transforms:
+				1. translate3d
+				1. translateZ
+				1. scale3d
+				1. rotateX
+				1. rotateY
+				1. rotate3d
+				1. perspective
+				1. matrix3d
+			3d transforms are also part of the working draft. You can animate more properties than these, and you still get the other benefits, just not the hardware acceleration. 
+
+			(code example)
+		#### Animations ####
+			Animations work a little differently than transitions. They too are part of the working draft, and are not officially a part of the recommendation. But most modern browsers have some implementation of them and they are a lot of fun to use.  
+			The benefit to using keyframed animations over transitions, is that it's easier to animate multiple properties on the same element, with different timing structures, and/or to re-use that animation for multiple elements.  
+			You get the same benefits as the CSS transitions as well.
+
+			(code example)
+		#### Media Queries ####
+			Let's talk a little bit about media queries. Finally this is something that is an official part of the recommendation, and every modern browser (IE9+) has implemented them. Awesome! What are they?
+			W3 says the benefit is the ability to use "media-dependent style sheets tailored for different media types". The queries themselves check for both types of media and specific media features such as width height and color profiles, it can also detect things such as whether or not an accessibility device is reading the page such as a tty, braille, or speech device. Media queries have gotten a lot of attention with all of the talk of responsive design that's been going around. 
+		
+			(code example)
+	### LESS and SASS ###
+		#### Variables ####
+		If you haven't worked with variables before, you will quickly learn that they are one of the basic building blocks of most programming languages. Variables are like little containers that hold values. The values can then be recalled or changed by their given name and used throughout your stylesheet, or at least within the variable scope (we will talk about scoping in a bit). The benefit to using variables is most notably maintainability, but in order to realize that benefit you have to focus really well on those role-based naming conventions.
+
+		Let's take a look at using variables within a stylesheet.
+		(examples/variables/)
+
+		Ok so you get the idea, variables hold values that can be re-used, throughout my application, and their names should be taken into consideration.
+		Let's talk for a minute about how a large brand might be able to use a consistent set of variables even if they don't share the same stylesheets.
+
+		Let's stick with our color variables, and I'd like to show you how you might extract them into a color "module" that can be re-used through multiple stylesheets. If we move the block of variables that we had set up in the files before, and move them to their own file called color-variables.scss or color-variables.less, we can import that file into more than one stylesheet and re-use the variables without worrying that we will override one of our styles. One thing that you will notice is that unlike CSS when you 'import' a less or sass file, the browser does not need to make a separate request for that file, it actually gets compiled into the destination file 'in this case 'module-sass.css|module-less.css'. 
+
+		Variables aren't just for colors though, you can use any value type that is native to CSS including numbers, colors, lists of values, strings with and without quotes (in order to support values like 'normal', or 'bold'). As well as some additional types like booleans and nulls which are not available natively in css. The benefit of these comes in when you start dealing with logical operators which both LESS and SASS support.
+
+		#### Mixins ####
+		Mixins are kindof like variables. The difference between the two is that while variables hold values, mixins hold multiple property value definitions, that can be re-used in multiple classes. A really popular application of mixins is to use them to simplify vendor prefixed properties in a class such as border-radius or transitions. I find that they can be useful for things like enforcing defaults as well. If you can talk your designers into being consistent, you may be able to mixin something like .rounded-corners without being worried about the shape of the corners being inconsistent.
+		Demo: 
+			1. Mixins/less|sass.php
+
+		I'm about to tell you about something called parametric mixins, but don't let my enthusiasm about them fool you. I believe in having a consistent design language, so I think that avoiding the ability to override certain things is preferable most of the time. The minute that you give someone the ability to add variance they will, and it's part of our job ( both UI Engineers and Designers ) to determine if the variance is necessary and come up with a solid, inteligent reason why.
+		Ok, so, with that said, parametric mixins are incredibly exciting. Like variables they have a slightly different syntax between SASS and LESS, and there is some difference in the way that they work. 
+
+		Demo:
+			1. parametric-less|sass.php
+			1. Guards vs Control Directives
+				Guards and control directives are NOT the same thing, I only use the demo to show you that while guards are not something that comes with SASS it doesn't mean that the ability to simulate them isn't there. 
+			1.  Airity
+		
+		#### Nested Rules ####
+		Nested rules are one of the big things that draws most people to use LESS and SASS initially. We are all used to seeing selectors that look like this:
+			`
+			nav {...}
+			nav ul {...}
+			nav ul li {...}
+			nav ul li a{...}
+			`
+		This is a very common ruleset for css which gives you the ability to style a navigation element that contains a list of links. But, you can see that it's incredibly redundant. We have to type each element over and over again. With nested rules we can visualize the structure a little more easily. It may look something like this: 
+			`
+			nav {
+				...
+				ul {
+					...
+					li {
+						...
+						a {
+
+						}
+					}
+				}
+			}
+			`
+		At first it actually looks a little more daunting to me. In reality what this does is help you manage the scope of not only your cascades but also of your variables and mixins as well. 
+		Let's play with the nested rules a little bit and see how they compile with and without the scoped variables.
+	
+		(demo)
+
+		Scoping works the same for variables as it does for mixins as well. So you have really fine control over your application, and you can even re-use names in different scopes if it is appropriate to do so. However, you want to be careful using nested rules that you don't confuse yourself by doing so. You also want to be careful that you don't nest EVERYthing just because you can. I have heard it said that as a best practice you should only nest 2-3 levels deep. While I agree that you want to keep things easy to read and maintain, I don't think that setting an arbitrary number of levels is the right solution to this. Think deeply about wether or not there is a need to nest the rule, or if the rule may be used outside of the specific structure that you are currently using. Then determine if nesting is appropriate.
+	#### Compiling ####
+		Both LESS and Sass come with their own compilers, they are good. They can be better.
+		Both technologies pre-compile, meaning before they get to the browser, but only LESS has the ability to run client side, which provides some benefits for development but even Alexis Sellier ( the creator of less ) recommends that it be compiled prior to going to production.
+
+		Lets talk first about the compilers that come with them. 
+
+		lessc is the node module that can be used to compile less. 
+		If you run `lessc <filename>` the command line will echo back to you the compiled output. You can do anything you like with this like pipe it into a file. 
+		Adding the `-x` flag will give you the compressed output.
+		If you run `lessc` without a file name you can see all of the options that you are allowed to pass into it.
+
+		sass ( the sass compiler ) is a little bit different, it runs on ruby instead of node, and has a few more options, and a slightly different syntax. Running `sass <filename>` will compile the sass and echo it into your command line just like less, but if you would like it to compile into a file you can seperate the input and output file names with a colon (:). `sass <input>:<output>`. Sass also has this command called 'watch', it's really great. If you pass the command a '--watch' flag, it will actually watch the file for changes, and when it detects the change it will recompile the sass for you automatically. Sass also has multiple compression settings: 
+			1. Nested
+			1. Compact
+			1. Compressed
+			1. Expanded
+		(demo)
+
+		You can choose which setting you like, but for production I would recommend the 'compressed' setting you actually save bytes that you are sending to the browser by removing the linebreaks and whitespace characters, and with the recent developments in developer tools in modern browsers you rarely need to dig through the raw source code. Most browsers will parse out the stylesheet and display it for you nicely in their own manner anyway. Save the bytes, decrease the bandwidth, shorten your loading times, everyone will be much happier.
+
+	#### Tools ####
+
+		Ok, I said they can be better. There are some really great tools that you can use to compile Less and Sass. If you are into the GUI type of thing feel free to use a tool like Less.app ( MacOSX ) or Koala ( Win ). If you want some more features on the Mac CodeKit is a great GUI tool that does things like live reloading hinting and linting optimizing images etc.
+
+		My favorite tool, and the one that I used for the demos here is a node module ( or set of node modules ) called grunt. It allows you run all sorts of different types of tasks using popular services, and you can even build in tasks of your own. There is a watch task like we explored with Sass that will perform all of your tasks ( or a subset of your tasks ) when it detects certain changes, and it's all totally configurable. I can't recommend grunt more. I also have a grunt task set up so that our Jenkins CI server will concatenate and minify our files for us, so that they don't need to be committed to our code repository, and we also don't need to deploy them manually. It's really great.
