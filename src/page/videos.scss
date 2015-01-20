@@ -14,3 +14,21 @@ video { display: none; }
 	padding-top: 56.25%;
 	clear:both;
 }
+
+.media-source li {
+	display:inline-block;
+	vertical-align: bottom;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	&:first-child {
+		margin-left: 0;
+	}
+	a {
+		text-decoration: none;
+	}
+	img {
+		max-height: 50px;
+		max-width: 100%;
+		vertical-align: bottom;
+	}
+}
